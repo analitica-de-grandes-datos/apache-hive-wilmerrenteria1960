@@ -45,4 +45,4 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
-
+SELECT concat_ws(':',collect_list(UPPER(lista))) FROM tbl0 LATERAL VIEW explode(c5) result AS lista GROUP BY c1;

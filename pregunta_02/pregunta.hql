@@ -17,5 +17,5 @@ CREATE TABLE information (letra STRING,fecha DATE,valor INT)ROW FORMAT DELIMITED
 LOAD DATA LOCAL INPATH "data.tsv" OVERWRITE INTO TABLE information;
 INSERT OVERWRITE DIRECTORY 'output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-SELECT letra, fecha,valor FROM information ORDER BY letra ,valor ;
+SELECT * FROM information ORDER BY letra ,valor ,fecha;
 

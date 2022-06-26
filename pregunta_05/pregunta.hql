@@ -44,4 +44,4 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
-
+SELECT  YEAR(c4) as fecha , lista , count(*) FROM tbl0  lateral view EXPLODE(c5) ptable as lista GROUP BY YEAR(c4)  , lista ;
