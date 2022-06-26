@@ -34,4 +34,4 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
 */
 INSERT OVERWRITE DIRECTORY 'output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-SELECT letra, key, COUNT(*) AS cantidad FROM t0 LATERAL VIEW EXPLODE(c3) c3_separado AS key,value LATERAL VIEW EXPLODE(c2) c2_separado AS letra GROUP BY letra, key;
+SELECT letra, key, count(*) AS total FROM t0 LATERAL VIEW EXPLODE(c3) new_c3 AS key,value LATERAL VIEW EXPLODE(c2) new_c2 AS letra GROUP BY letra,key;
