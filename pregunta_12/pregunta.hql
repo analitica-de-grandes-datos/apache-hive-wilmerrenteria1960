@@ -32,9 +32,9 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
-INSERT OVERWRITE DIRECTORY 'output'
-ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-SELECT letra, k, count(*) AS cantidad
-FROM t0 LATERAL VIEW EXPLODE(c3) c3_exploded AS k,v
-        LATERAL VIEW EXPLODE(c2) c2_exploded AS letra
-GROUP BY letra, k;
+CREATE TABLE data AS SELECT letra, key, value FROM (SELECT letra, c3 FROM t0 LATERAL VIEW explode(c2) t0 AS letra ) data_1 
+LATERAL VIEW explode (c3) data_1; 
+ 
+INSERT OVERWRITE LOCAL DIRECTORY 'output' 
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
+SELECT letra, key, COUNT(1) FROM data GROUP BY letra, key ;
